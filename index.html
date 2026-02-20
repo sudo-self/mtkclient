@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MTK FRP Bypass & Root Guide • Dark Mode</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0c0f;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1.5rem;
+            color: #e1e7ef;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .card {
+            background: #13171c;
+            border-radius: 2rem;
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+            overflow: hidden;
+            backdrop-filter: blur(2px);
+        }
+
+        .header {
+            padding: 2rem 2rem 1rem 2rem;
+            border-bottom: 1px solid #252b33;
+            background: linear-gradient(145deg, #151b22 0%, #0f1318 100%);
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            background: linear-gradient(135deg, #c0d0e7, #9bb5d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.3rem;
+        }
+
+        .header .badge {
+            display: inline-block;
+            background: #1f2a33;
+            color: #85b0d9;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            letter-spacing: 0.3px;
+            border: 1px solid #2d3a46;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+
+        .content {
+            padding: 2rem;
+        }
+
+        .section {
+            background: #101419;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1.8rem;
+            border: 1px solid #252d36;
+            box-shadow: 0 10px 20px -10px #00000080;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: #b7c9e0;
+            border-left: 4px solid #3d6c9c;
+            padding-left: 1rem;
+        }
+
+        .section-title i {
+            color: #5588b9;
+            font-size: 1.5rem;
+        }
+
+        .step-list {
+            list-style: none;
+        }
+
+        .step-list li {
+            background: #1a2129;
+            margin-bottom: 0.8rem;
+            padding: 0.9rem 1.2rem;
+            border-radius: 3rem;
+            border: 1px solid #2f3a45;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+        }
+
+        .step-list li::before {
+            content: "▹";
+            color: #6d9ecc;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .code-block {
+            background: #0b0f13;
+            border-radius: 1.2rem;
+            padding: 1.2rem 1.5rem;
+            font-family: 'Fira Code', 'Menlo', 'Courier New', monospace;
+            font-size: 0.9rem;
+            border: 1px solid #2c3743;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            color: #c9ddec;
+            margin: 1.2rem 0;
+            box-shadow: inset 0 5px 15px rgba(0,0,0,0.8), 0 2px 5px #0000004d;
+            border-left: 3px solid #3b6e9f;
+        }
+
+        .code-block span.comment {
+            color: #6b859e;
+            font-style: italic;
+        }
+
+        .code-block span.prompt {
+            color: #6aa94b;
+        }
+
+        .note {
+            background: #1b232c;
+            border-radius: 1.2rem;
+            padding: 1.2rem 1.5rem;
+            border-left: 5px solid #9b6b3e;
+            color: #cbd5e3;
+            font-size: 0.95rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 5px 12px #0000004d;
+            display: flex;
+            gap: 0.8rem;
+            align-items: flex-start;
+        }
+
+        .note i {
+            color: #e6b87b;
+            font-size: 1.5rem;
+        }
+
+        .hr-glow {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #3b556b, transparent);
+            margin: 2rem 0;
+            border: 0;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .tag {
+            background: #1b3143;
+            color: #94c0f0;
+            border-radius: 30px;
+            padding: 0.2rem 1rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            border: 1px solid #314d68;
+            text-transform: uppercase;
+        }
+
+        .command-group {
+            background: #0f151b;
+            border-radius: 1.2rem;
+            border: 1px solid #293845;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .command-header {
+            background: #1e2935;
+            padding: 0.6rem 1.2rem;
+            font-weight: 600;
+            color: #afcbee;
+            border-bottom: 1px solid #314151;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .command-body {
+            padding: 1rem 1.2rem;
+        }
+
+        .warning-box {
+            background: #221b1b;
+            border-left: 5px solid #b34a4a;
+            border-radius: 1.2rem;
+            padding: 1.2rem 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .success-box {
+            background: #1b2a1f;
+            border-left: 5px solid #5f9e6b;
+            border-radius: 1.2rem;
+            padding: 1.2rem 1.5rem;
+            margin: 1.5rem 0;
+        }
+    </style>
+    <!-- Font Awesome for icons (optional but nice) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <h1><i class="fas fa-terminal" style="margin-right: 0.5rem; color: #608fc3;"></i> MTK FRP Bypass + Root</h1>
+                <div style="display: flex; gap: 0.8rem; align-items: center; margin-top: 0.5rem; flex-wrap: wrap;">
+                    <span class="badge"><i class="fas fa-shield-alt" style="margin-right: 0.3rem;"></i> mtkclient v2.0.1</span>
+                    <span class="badge"><i class="fas fa-moon"></i> dark mode</span>
+                    <span class="badge"><i class="fas fa-skull"></i> root guide</span>
+                </div>
+            </div>
+
+            <div class="content">
+
+                <!-- 1. Setup Environment -->
+                <div class="section">
+                    <div class="section-title">
+                        <i class="fas fa-cog"></i> 1. Environment Setup
+                    </div>
+                    <div class="command-group">
+                        <div class="command-header">
+                            <i class="fas fa-chevron-circle-right" style="color: #5f8dc9;"></i> create & activate venv
+                        </div>
+                        <div class="command-body">
+                            <div class="code-block">
+                                <span class="prompt">$</span> python3 -m venv .<br>
+                                <span class="prompt">$</span> source bin/activate<br>
+                                <span class="prompt">$</span> python3 mtk_gui.py
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Make sure you're inside the mtkclient directory. The virtual environment keeps dependencies clean.</span>
+                    </div>
+                </div>
+
+                <!-- 2. BROM Mode Entry -->
+                <div class="section">
+                    <div class="section-title">
+                        <i class="fas fa-power-off"></i> 2. Enter BROM Mode
+                    </div>
+                    <ul class="step-list">
+                        <li>Power off the phone completely</li>
+                        <li>Hold <strong>Volume Up + Volume Down</strong> simultaneously</li>
+                        <li>While holding buttons, connect USB cable to PC</li>
+                        <li>Device should now be in BROM mode (mtkclient will detect)</li>
+                    </ul>
+                    <div class="note">
+                        <i class="fas fa-clock"></i>
+                        <span>You'll need to enter BROM mode multiple times throughout these processes. Keep these steps handy.</span>
+                    </div>
+                </div>
+
+                <!-- FRP SECTION - Original Content -->
+                <div style="margin: 2rem 0 1rem 0; display: flex; align-items: center; gap: 1rem;">
+                    <i class="fas fa-lock" style="color: #b87b4a; font-size: 1.8rem;"></i>
+                    <h2 style="color: #cddcee; font-weight: 500; letter-spacing: 1px;">FRP BYPASS</h2>
+                    <div style="flex: 1; height: 1px; background: linear-gradient(90deg, #3b556b, transparent);"></div>
+                </div>
+
+                <!-- 3. Bootloader Unlock (FRP) -->
+                <div class="section">
+                    <div class="section-title">
+                        <i class="fas fa-lock-open"></i> 3. Unlock Bootloader
+                    </div>
+                    <div class="code-block">
+                        <span class="prompt">$</span> python3 mtk.py da seccfg unlock
+                    </div>
+                    <p style="color: #9fb0cc; margin-top: 0.5rem; font-size: 0.9rem;"><i class="fas fa-check-circle" style="color: #5d9b5d;"></i> This command unlocks the bootloader (necessary for full FRP bypass on some devices).</p>
+                </div>
+
+                <!-- 4. FRP Partition Erase -->
+                <div class="section">
+                    <div class="section-title">
+                        <i class="fas fa-trash-alt"></i> 4. Remove FRP Partitions
+                    </div>
+
+                    <div class="command-group">
+                        <div class="command-header">
+                            <i class="fas fa-list"></i> list partitions (find FRP names)
+                        </div>
+                        <div class="command-body">
+                            <div class="code-block">
+                                <span class="prompt">$</span> python3 mtk.py rl list
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="command-group">
+                        <div class="command-header">
+                            <i class="fas fa-eraser"></i> erase FRP and related partitions
+                        </div>
+                        <div class="command-body">
+                            <div class="code-block">
+                                <span class="prompt">$</span> python3 mtk.py e frp<br>
+                                <span class="prompt">$</span> python3 mtk.py e protect1<br>
+                                <span class="prompt">$</span> python3 mtk.py e protect2<br>
+                                <span class="prompt">$</span> python3 mtk.py e persistence   <span class="comment"># if exists</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="note">
+                        <i class="fas fa-exclamation-triangle" style="color: #e6b87b;"></i>
+                        <span><strong>Note:</strong> Erasing only these partitions does NOT wipe your OS or personal data. It only removes Google account lock.</span>
+                    </div>
+                </div>
+
+                <!-- 5. Reset -->
+                <div class="section">
+                    <div class="section-title">
+                        <i class="fas fa-redo-alt"></i> 5. Reboot Device
+                    </div>
+                    <div class="code-block">
+                        <span class="prompt">$</span> python3 mtk.py reset
+                    </div>
+                    <p style="color: #9fb0cc; margin-top: 0.5rem;">The phone will restart. You can now go through setup without Google account prompt.</p>
+                </div>
+
+                <!-- ROOT SECTION - New Content -->
+                <div style="margin: 3rem 0 1rem 0; display: flex; align-items: center; gap: 1rem;">
+                    <i class="fas fa-skull" style="color: #aa80c9; font-size: 1.8rem;"></i>
+                    <h2 style="color: #cddcee; font-weight: 500; letter-spacing: 1px;">ROOTING GUIDE</h2>
+                    <div style="flex: 1; height: 1px; background: linear-gradient(90deg, #6a4f8a, transparent);"></div>
+                </div>
+
+                <div class="warning-box">
+                    <div style="display: flex; gap: 1rem; align-items: center;">
+                        <i class="fas fa-exclamation-triangle" style="color: #e09b6c; font-size: 1.8rem;"></i>
+                        <div>
+                            <strong style="color: #f0b88b; font-size: 1.1rem;">Prerequisites</strong>
+                            <ul style="margin-top: 0.5rem; list-style: none;">
+                                <li style="margin-bottom: 0.3rem;">✓ Developer Options enabled (tap build number 7 times)</li>
+                                <li style="margin-bottom: 0.3rem;">✓ USB Debugging enabled</li>
+                                <li style="margin-bottom: 0.3rem;">✓ OEM Unlocking enabled</li>
+                                <li>✓ Stock firmware backup recommended</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Root Step 1: Unlock Bootloader -->
+                <div class="section">
+                    <div class="section-title">
+                        <i class="fas fa-lock-open"></i> Step 1: Unlock Bootloader
+                    </div>
+                    <p style="color: #a5b9d0; margin-bottom: 1rem;">Enter BROM mode, then:</p>
+                    <div class="code-block">
+                        <span class="prompt">$</span> python3 mtk.py da seccfg unlock
+                    </div>
+                    <div class="code-block">
+                        <span class="prompt">$</span> python3 mtk.py reset
+                    </div>
+                </div>
+
+                <!-- Root Step 2: Dump Stock Boot Image -->
+                <div class="section">
+                    <div class="section-title">
+                        <i class="fas fa-save"></i> Step 2: Dump Stock Boot Image
+                    </div>
+                    <p style="color: #a5b9d0; margin-bottom: 1rem;">Enter BROM mode again, then dump partitions:</p>
+                    <div class="code-block">
+                        <span class="prompt">$</span> python3 mtk.py r boot,vbmeta boot.img,vbmeta.img
+                    </div>
+                    <div class="code-block">
+                        <span class="prompt">$</span> python3 mtk.py reset
+                    </div>
+                </div>
+
+                <!-- Root Step 3: Patch with Magisk -->
+                <div class="section">
+                    <div class="section-title">
+                        <i class="fas fa-magic"></i> Step 3: Patch with Magisk
+                    </div>
+                    
+                    <div class="command-group">
+                        <div class="command-header">
+                            <i class="fas fa-upload"></i> transfer boot.img to phone
+                        </div>
+                        <div class="command-body">
+                            <div class="code-block">
+                                <span class="prompt">$</span> adb push boot.img /sdcard/Download/
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="note" style="border-left-color: #7b63b0;">
+                        <i class="fas fa-mobile-alt"></i>
+                        <div>
+                            <strong>On your phone:</strong>
+                            <ol style="margin-top: 0.5rem; margin-left: 1.2rem;">
+                                <li>Install Magisk APK</li>
+                                <li>Open Magisk → Install → Select and Patch a File</li>
+                                <li>Navigate to /sdcard/Download/boot.img</li>
+                                <li>Tap "Let's Go" — patched file will be saved in Downloads</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="command-group">
+                        <div class="command-header">
+                            <i class="fas fa-download"></i> retrieve patched image
+                        </div>
+                        <div class="command-body">
+                            <div class="code-block">
+                                <span class="prompt">$</span> adb pull /sdcard/Download/magisk_patched-xxxxx.img boot.patched
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Root Step 4: Flash Patched Image -->
+                <div class="section">
+                    <div class="section-title">
+                        <i class="fas fa-bolt"></i> Step 4: Flash Patched Image
+                    </div>
+                    <p style="color: #a5b9d0; margin-bottom: 1rem;">Enter BROM mode one final time:</p>
+
+                    <div class="command-group">
+                        <div class="command-header">
+                            <i class="fas fa-ban"></i> disable vbmeta verification (prevents boot loops)
+                        </div>
+                        <div class="command-body">
+                            <div class="code-block">
+                                <span class="prompt">$</span> python3 mtk.py da vbmeta 3
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="command-group">
+                        <div class="command-header">
+                            <i class="fas fa-write"></i> flash patched boot image
+                        </div>
+                        <div class="command-body">
+                            <div class="code-block">
+                                <span class="prompt">$</span> python3 mtk.py w boot boot.patched
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="note" style="border-left-color: #6b9e7a;">
+                        <i class="fas fa-info-circle"></i>
+                        <span><strong>For A/B slot devices:</strong> Use <code>python3 mtk.py w boot_a boot.patched</code> and <code>python3 mtk.py w boot_b boot.patched</code></span>
+                    </div>
+                </div>
+
+                <!-- Root Step 5: Reboot & Enjoy -->
+                <div class="section">
+                    <div class="section-title">
+                        <i class="fas fa-redo-alt"></i> Step 5: Reboot & Enjoy
+                    </div>
+                    <div class="code-block">
+                        <span class="prompt">$</span> python3 mtk.py reset
+                    </div>
+                    <div class="success-box">
+                        <div style="display: flex; gap: 1rem; align-items: center;">
+                            <i class="fas fa-check-circle" style="color: #7bc97b; font-size: 2rem;"></i>
+                            <div>
+                                <strong style="color: #a0e0a0;">Root achieved!</strong>
+                                <p style="color: #b0d6b0;">Open Magisk app — it should show "Installed" and you'll have root access.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- additional tip -->
+                <hr class="hr-glow">
+
+                <div style="background: #0f161e; border-radius: 1.5rem; padding: 1.5rem; border: 1px solid #26313d;">
+                    <div style="display: flex; gap: 1rem; align-items: flex-start;">
+                        <i class="fas fa-skull" style="font-size: 2rem; color: #8f79b0;"></i>
+                        <div>
+                            <h4 style="color: #bacfeb; margin-bottom: 0.5rem;">⚠️ Important Notes</h4>
+                            <p style="color: #b0c2d9; font-size: 0.95rem;">• FRP erase does NOT require new firmware — just reboot.<br>
+                            • Rooting requires bootloader to be unlocked first (already done in FRP section).<br>
+                            • Both processes will wipe your data — backup first!<br>
+                            • If you get stuck, re-enter BROM mode and try again.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- footer -->
+                <div style="margin-top: 2rem; display: flex; justify-content: space-between; align-items: center; color: #4b6179; font-size: 0.8rem;">
+                    <span><i class="far fa-copyright"></i> mtkclient frp + root guide</span>
+                    <span>
+                        <i class="fab fa-github"></i> commands verified for v2.0.1
+                    </span>
+                </div>
+
+            </div> <!-- end content -->
+        </div> <!-- end card -->
+    </div> <!-- end container -->
+</body>
+</html>
